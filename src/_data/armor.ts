@@ -1,4 +1,5 @@
 import { ArmorPiece, ArmorSet } from "../_models/armor";
+import { extractUniqueArmorPieceNames, extractUniqueItemNames } from "../_utils/data-extractors";
 
 export const armorData: ArmorSet[] = [
     {
@@ -393,30 +394,6 @@ export const armorData: ArmorSet[] = [
     },
 ];
 
-export const armorPieceNames: string[] = extractUniqueArmorPieceNames();
-export const itemNames: string[] = extractUniqueItemNames();
+export const armorPieceNames: string[] = extractUniqueArmorPieceNames(armorData);
+export const itemNames: string[] = extractUniqueItemNames(armorData);
 
-function extractUniqueArmorPieceNames(): string[] {
-    return armorData.flatMap((armorSet) => [
-        armorSet.headgear.name,
-        armorSet.body.name,
-        armorSet.legwear.name,
-    ]);
-}
-
-function extractUniqueItemNames(): string[] {
-    const uniqueNames: Set<string> = new Set();
-    armorData.forEach((armorSet) => {
-        for (const [key, val] of Object.entries(armorSet)) {
-            if (["headgear", "body", "legwear"].includes(key)) {
-                for (const level of (val as unknown as ArmorPiece)
-                    .materialsRequiredForUpgrades) {
-                    for (const req of level) {
-                        uniqueNames.add(req[0]);
-                    }
-                }
-            }
-        }
-    });
-    return [...uniqueNames];
-}
