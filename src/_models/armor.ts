@@ -16,4 +16,4 @@ export interface ArmorPiece {
     ]
 }
 
-export type MaterialRequirement = [string, number];
+export type MaterialRequirement = [string, number]

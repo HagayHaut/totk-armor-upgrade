@@ -1,0 +1,1 @@
+export type StringNumberMap =  { [key: string]: number };

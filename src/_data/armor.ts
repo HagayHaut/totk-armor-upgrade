@@ -1,5 +1,5 @@
 import { ArmorPiece, ArmorSet } from "../_models/armor";
-import { extractUniqueArmorPieceNames, extractUniqueItemNames } from "../_utils/data-extractors";
+import { extractMaterialRequirements, extractUniqueArmorPieceNames, extractUniqueMaterialNames } from "../_utils/data-extractors";
 
 export const armorData: ArmorSet[] = [
     {
@@ -372,7 +372,7 @@ export const armorData: ArmorSet[] = [
         legwear: {
             name: "Zonaite Shin Guards",
             materialsRequiredForUpgrades: [
-                [["Soldier COnstruct Horn", 5]],
+                [["Soldier Construct Horn", 5]],
                 [
                     ["Soldier Construct II Horn", 5],
                     ["Zonaite", 5],
@@ -394,6 +394,6 @@ export const armorData: ArmorSet[] = [
     },
 ];
 
-export const armorPieceNames: string[] = extractUniqueArmorPieceNames(armorData);
-export const itemNames: string[] = extractUniqueItemNames(armorData);
-
+export const armorPieceNames = extractUniqueArmorPieceNames(armorData);
+export const itemNames = extractUniqueMaterialNames(armorData);
+export const totalRequirements = extractMaterialRequirements(armorData);
