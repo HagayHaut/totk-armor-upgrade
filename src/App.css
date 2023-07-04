@@ -1,0 +1,17 @@
+.selected-armor-piece {
+    display: flex;
+    gap: 1rem;
+}
+
+.remove-selected-piece {
+    cursor: pointer;
+}
+
+.selected-pieces-container {
+    height: 50vh;
+    overflow: auto;
+}
+
+.app {
+    display: flex;
+}

@@ -8,12 +8,7 @@ export interface ArmorSet {
 
 export interface ArmorPiece {
     name: string;
-    materialsRequiredForUpgrades: [
-        MaterialRequirement[],
-        MaterialRequirement[],
-        MaterialRequirement[],
-        MaterialRequirement[],
-    ]
+    materialsRequiredForUpgrades: MaterialRequirement[][];
 }
 
 export type MaterialRequirement = [string, number]
