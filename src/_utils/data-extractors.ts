@@ -43,3 +43,23 @@ export function extractMaterialRequirements(armorData: ArmorSet[]): StringNumber
     }
     return requirments;
 }
+
+export function addRupeeReqsToArmorSet(armorSet: ArmorSet): void {
+    addRupeeReqsToArmorPiece(armorSet.headgear);
+    addRupeeReqsToArmorPiece(armorSet.body);
+    addRupeeReqsToArmorPiece(armorSet.legwear);
+}
+
+function addRupeeReqsToArmorPiece(armorPiece: ArmorPiece): void {
+    armorPiece.materialsRequiredForUpgrades.forEach((level, i) => {
+        let req: number;
+        switch (i) {
+            case 0: req = 10; break;
+            case 1: req = 50; break;
+            case 2: req = 200; break;
+            case 3: req = 500; break;
+            default: req = 0;
+        }
+        level.push(["Rupee", req]);
+    });
+}

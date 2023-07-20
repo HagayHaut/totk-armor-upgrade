@@ -64,6 +64,7 @@ function App() {
                 );
             }
         });
+        console.log(requirements);
         setCalculatedResults(requirements);
     }
 

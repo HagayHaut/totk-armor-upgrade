@@ -1,5 +1,10 @@
 import { ArmorSet, MaterialRequirement } from "../_models/armor";
-import { extractMaterialRequirements, extractUniqueArmorPieceNames, extractUniqueMaterialNames } from "../_utils/data-extractors";
+import {
+    addRupeeReqsToArmorSet,
+    extractMaterialRequirements,
+    extractUniqueArmorPieceNames,
+    extractUniqueMaterialNames,
+} from "../_utils/data-extractors";
 
 export const armorData: ArmorSet[] = [
     {
@@ -26,7 +31,7 @@ export const armorData: ArmorSet[] = [
         },
         body: {
             name: "Flamebreaker Armor",
-            materialsRequiredForUpgrades:  <MaterialRequirement[][]>[
+            materialsRequiredForUpgrades: <MaterialRequirement[][]>[
                 [["Moblin Horn", 3]],
                 [
                     ["Moblin Fang", 5],
@@ -46,7 +51,7 @@ export const armorData: ArmorSet[] = [
         },
         legwear: {
             name: "Flamebreaker Boots",
-            materialsRequiredForUpgrades:  <MaterialRequirement[][]>[
+            materialsRequiredForUpgrades: <MaterialRequirement[][]>[
                 [["Moblin Horn", 3]],
                 [
                     ["Moblin Fang", 5],
@@ -70,7 +75,7 @@ export const armorData: ArmorSet[] = [
         name: "Snowquill Set",
         headgear: {
             name: "Snowquill Headdress",
-            materialsRequiredForUpgrades:  <MaterialRequirement[][]>[
+            materialsRequiredForUpgrades: <MaterialRequirement[][]>[
                 [["Red Chuchu Jelly", 3]],
                 [
                     ["Warm Safflina", 3],
@@ -90,7 +95,7 @@ export const armorData: ArmorSet[] = [
         },
         body: {
             name: "Snowquill Tunic",
-            materialsRequiredForUpgrades:  <MaterialRequirement[][]>[
+            materialsRequiredForUpgrades: <MaterialRequirement[][]>[
                 [["Red Chuchu Jelly", 3]],
                 [
                     ["Warm Safflina", 3],
@@ -110,7 +115,7 @@ export const armorData: ArmorSet[] = [
         },
         legwear: {
             name: "Snowquill Trousers",
-            materialsRequiredForUpgrades:  <MaterialRequirement[][]>[
+            materialsRequiredForUpgrades: <MaterialRequirement[][]>[
                 [["Red Chuchu Jelly", 3]],
                 [
                     ["Warm Safflina", 3],
@@ -134,7 +139,7 @@ export const armorData: ArmorSet[] = [
         name: "Zora Set",
         headgear: {
             name: "Zora Helm",
-            materialsRequiredForUpgrades:  <MaterialRequirement[][]>[
+            materialsRequiredForUpgrades: <MaterialRequirement[][]>[
                 [["Lizalfos Horn", 3]],
                 [
                     ["Hyrule Bass", 5],
@@ -154,7 +159,7 @@ export const armorData: ArmorSet[] = [
         },
         body: {
             name: "Zora Armor",
-            materialsRequiredForUpgrades:  <MaterialRequirement[][]>[
+            materialsRequiredForUpgrades: <MaterialRequirement[][]>[
                 [["Lizalfos Horn", 3]],
                 [
                     ["Hyrule Bass", 5],
@@ -174,7 +179,7 @@ export const armorData: ArmorSet[] = [
         },
         legwear: {
             name: "Zora Greaves",
-            materialsRequiredForUpgrades:  <MaterialRequirement[][]>[
+            materialsRequiredForUpgrades: <MaterialRequirement[][]>[
                 [["Lizalfos Horn", 3]],
                 [
                     ["Hyrule Bass", 5],
@@ -198,7 +203,7 @@ export const armorData: ArmorSet[] = [
         name: "Desert Voe Set",
         headgear: {
             name: "Desert Voe Headband",
-            materialsRequiredForUpgrades:  <MaterialRequirement[][]>[
+            materialsRequiredForUpgrades: <MaterialRequirement[][]>[
                 [["White Chuchu Jelly", 3]],
                 [
                     ["White Chuchu Jelly", 5],
@@ -218,7 +223,7 @@ export const armorData: ArmorSet[] = [
         },
         body: {
             name: "Desert Voe Spaulder",
-            materialsRequiredForUpgrades:  <MaterialRequirement[][]>[
+            materialsRequiredForUpgrades: <MaterialRequirement[][]>[
                 [["White Chuchu Jelly", 3]],
                 [
                     ["White Chuchu Jelly", 5],
@@ -238,7 +243,7 @@ export const armorData: ArmorSet[] = [
         },
         legwear: {
             name: "Desert Voe Trousers",
-            materialsRequiredForUpgrades:  <MaterialRequirement[][]>[
+            materialsRequiredForUpgrades: <MaterialRequirement[][]>[
                 [["White Chuchu Jelly", 3]],
                 [
                     ["White Chuchu Jelly", 5],
@@ -262,7 +267,7 @@ export const armorData: ArmorSet[] = [
         name: "Fierce Diety Set",
         headgear: {
             name: "Fierce Diety Mask",
-            materialsRequiredForUpgrades:  <MaterialRequirement[][]>[
+            materialsRequiredForUpgrades: <MaterialRequirement[][]>[
                 [
                     ["Hinox Toenail", 5],
                     ["Dinraal's Scale", 1],
@@ -283,7 +288,7 @@ export const armorData: ArmorSet[] = [
         },
         body: {
             name: "Fierce Diety Armor",
-            materialsRequiredForUpgrades:  <MaterialRequirement[][]>[
+            materialsRequiredForUpgrades: <MaterialRequirement[][]>[
                 [
                     ["Hinox Toenail", 5],
                     ["Naydra's Scale", 1],
@@ -304,7 +309,7 @@ export const armorData: ArmorSet[] = [
         },
         legwear: {
             name: "Fierce Diety Boots",
-            materialsRequiredForUpgrades:  <MaterialRequirement[][]>[
+            materialsRequiredForUpgrades: <MaterialRequirement[][]>[
                 [
                     ["Hinox Toenail", 5],
                     ["Farosh's Scale", 1],
@@ -329,7 +334,7 @@ export const armorData: ArmorSet[] = [
         name: "Zonaite Set",
         headgear: {
             name: "Zonaite Helm",
-            materialsRequiredForUpgrades:  <MaterialRequirement[][]>[
+            materialsRequiredForUpgrades: <MaterialRequirement[][]>[
                 [["Soldier Construct Horn", 5]],
                 [
                     ["Soldier Construct II Horn", 5],
@@ -350,7 +355,7 @@ export const armorData: ArmorSet[] = [
         },
         body: {
             name: "Zonaite Waistguard",
-            materialsRequiredForUpgrades:  <MaterialRequirement[][]>[
+            materialsRequiredForUpgrades: <MaterialRequirement[][]>[
                 [["Soldier COnstruct Horn", 5]],
                 [
                     ["Soldier Construct II Horn", 5],
@@ -371,7 +376,7 @@ export const armorData: ArmorSet[] = [
         },
         legwear: {
             name: "Zonaite Shin Guards",
-            materialsRequiredForUpgrades:  <MaterialRequirement[][]>[
+            materialsRequiredForUpgrades: <MaterialRequirement[][]>[
                 [["Soldier Construct Horn", 5]],
                 [
                     ["Soldier Construct II Horn", 5],
@@ -394,6 +399,8 @@ export const armorData: ArmorSet[] = [
     },
 ].sort((a, b) => a.name.localeCompare(b.name));
 
+armorData.forEach(addRupeeReqsToArmorSet);
+console.log(armorData);
 export const armorPieceNames = extractUniqueArmorPieceNames(armorData);
 export const itemNames = extractUniqueMaterialNames(armorData);
 export const totalRequirements = extractMaterialRequirements(armorData);
