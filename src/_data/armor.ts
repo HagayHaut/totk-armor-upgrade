@@ -4,7 +4,7 @@ import {
     extractMaterialRequirements,
     extractUniqueArmorPieceNames,
     extractUniqueMaterialNames,
-} from "../_utils/data-extractors";
+} from "../_utils/data-processors";
 
 export const armorData: ArmorSet[] = [
     {
@@ -400,7 +400,6 @@ export const armorData: ArmorSet[] = [
 ].sort((a, b) => a.name.localeCompare(b.name));
 
 armorData.forEach(addRupeeReqsToArmorSet);
-console.log(armorData);
 export const armorPieceNames = extractUniqueArmorPieceNames(armorData);
 export const itemNames = extractUniqueMaterialNames(armorData);
 export const totalRequirements = extractMaterialRequirements(armorData);
