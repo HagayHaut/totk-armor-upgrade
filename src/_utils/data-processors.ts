@@ -1,5 +1,5 @@
 import { ArmorPiece, ArmorSet } from "../_models/armor";
-import { RupeeRequirements, StringNumberMap } from "../_models/generic";
+import { Items, RupeeRequirements, StringNumberMap } from "../_models/generic";
 
 export function extractUniqueArmorPieceNames(armorData: ArmorSet[]) {
     return armorData.flatMap((armorSet) => [
@@ -15,7 +15,7 @@ export function extractUniqueMaterialNames(armorData: ArmorSet[]) {
         for (const [key, val] of Object.entries(armorSet)) {
             if (["headgear", "body", "legwear"].includes(key)) {
                 for (const level of (val as unknown as ArmorPiece)
-                    .materialsRequiredForUpgrades) {
+                        .materialsRequiredForUpgrades) {
                     for (const [material, _] of level) {
                         uniqueNames.add(material);
                     }
@@ -60,6 +60,6 @@ function addRupeeReqsToArmorPiece(armorPiece: ArmorPiece) {
             case 3: req = RupeeRequirements.LEVEL_3; break;
             default: req = 0;
         }
-        level.push(["Rupee", req]);
+        level.push([Items.RUPEE, req]);
     });
 }
