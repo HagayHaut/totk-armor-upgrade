@@ -62,4 +62,17 @@ export class Items {
     public static OPAL = "Opal";
     public static FLINT = "Flint";
     public static RUBY = "Ruby";
+    public static SUNSET_FIREFLY = "Sunset Firefly";
+    public static SILENT_SHROOM = "Silent Shroom";
+    public static SNEAKY_RIVER_SNAIL = "Sneaky River Snail";
+    public static STICKY_FROG = "Sticky Frog";
+    public static SILENT_PRINCESS = "Silent Princess";
+    public static STEALTHFIN_TROUT = "Stealthfin Trout";
+    public static SUNDELION = "Sundelion";
+    public static KEESE_WING = "Keese Wing";
+    public static RUSHROOM = "Rushroom";
+    public static ELECTRIC_KEESE_WING = "Electric Keese Wing";
+    public static HIGHTAIL_LIZARD = "Hightail Lizard";
+    public static HOT_FOOTED_FROG = "Hot-Footed Frog";
+    public static SWIFT_VIOLET = "Swift Violet";
 }

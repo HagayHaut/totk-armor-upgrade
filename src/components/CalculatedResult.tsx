@@ -4,7 +4,7 @@ function CalculatedResult({ item, requirement }: CalculatedResultProps) {
     return (
         <div className="item-requirement">
             <p>{item}</p>
-            <p>{requirement}</p>
+            <p>{requirement.toLocaleString()}</p>
         </div>
     );
 }

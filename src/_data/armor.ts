@@ -279,7 +279,7 @@ export const armorData: ArmorSet[] = [
                 ],
                 [
                     [Items.HINOX_GUTS, 2],
-                    [Items.DINRAALS_SCALE, 1],
+                    [Items.DINRAALS_FANG, 1],
                 ],
                 [
                     [Items.LYNEL_GUTS, 2],
@@ -403,67 +403,131 @@ export const armorData: ArmorSet[] = [
         headgear: {
             name: "Stealth Mask",
             materialsRequiredForUpgrades: <MaterialRequirement[][]>[
-                [["Blue Nightshade", 5]],
+                [[Items.BLUE_NIGHTSHADE, 3]],
                 [
-                    [Items.SOLIDER_CONSTRUCT_2_HORN, 5],
-                    [Items.ZONAITE, 5],
-                    [Items.CAPTAIN_CONSTRUCT_1_HORN, 5],
+                    [Items.BLUE_NIGHTSHADE, 5],
+                    [Items.SUNSET_FIREFLY, 5],
                 ],
                 [
-                    [Items.LARGE_ZONAITE, 5],
-                    [Items.CAPTAIN_CONSTRUCT_2_HORN, 5],
-                    [Items.SOLIDER_CONSTRUCT_2_HORN, 5],
+                    [Items.SILENT_SHROOM, 8],
+                    [Items.STICKY_FROG, 5],
+                    [Items.SNEAKY_RIVER_SNAIL, 5],
                 ],
                 [
-                    [Items.LARGE_ZONAITE, 10],
-                    [Items.CAPTAIN_CONSTRUCT_2_HORN, 5],
-                    [Items.SOLDIER_CONSTRUCT_4_HORN, 5],
+                    [Items.SUNDELION, 10],
+                    [Items.STEALTHFIN_TROUT, 10],
+                    [Items.SILENT_PRINCESS, 5],
                 ],
             ],
         },
         body: {
             name: "Stealth Chest Guard",
             materialsRequiredForUpgrades: <MaterialRequirement[][]>[
-                [[Items.SOLDIER_CONSTRUCT_HORN, 5]],
+                [[Items.BLUE_NIGHTSHADE, 3]],
                 [
-                    [Items.SOLIDER_CONSTRUCT_2_HORN, 5],
-                    [Items.ZONAITE, 5],
-                    [Items.CAPTAIN_CONSTRUCT_1_HORN, 5],
+                    [Items.BLUE_NIGHTSHADE, 5],
+                    [Items.SUNSET_FIREFLY, 5],
                 ],
                 [
-                    [Items.LARGE_ZONAITE, 5],
-                    [Items.CAPTAIN_CONSTRUCT_2_HORN, 5],
-                    [Items.SOLIDER_CONSTRUCT_2_HORN, 5],
+                    [Items.SILENT_SHROOM, 8],
+                    [Items.STICKY_FROG, 5],
+                    [Items.SNEAKY_RIVER_SNAIL, 5],
                 ],
                 [
-                    [Items.LARGE_ZONAITE, 10],
-                    [Items.CAPTAIN_CONSTRUCT_2_HORN, 5],
-                    [Items.SOLDIER_CONSTRUCT_4_HORN, 5],
+                    [Items.SUNDELION, 10],
+                    [Items.STEALTHFIN_TROUT, 10],
+                    [Items.SILENT_PRINCESS, 5],
                 ],
             ],
         },
         legwear: {
             name: "Stealth Tights",
             materialsRequiredForUpgrades: <MaterialRequirement[][]>[
-                [[Items.SOLDIER_CONSTRUCT_HORN, 5]],
+                [[Items.BLUE_NIGHTSHADE, 3]],
                 [
-                    [Items.SOLIDER_CONSTRUCT_2_HORN, 5],
-                    [Items.ZONAITE, 5],
-                    [Items.CAPTAIN_CONSTRUCT_1_HORN, 5],
+                    [Items.BLUE_NIGHTSHADE, 5],
+                    [Items.SUNSET_FIREFLY, 5],
                 ],
                 [
-                    [Items.LARGE_ZONAITE, 5],
-                    [Items.CAPTAIN_CONSTRUCT_2_HORN, 5],
-                    [Items.SOLIDER_CONSTRUCT_2_HORN, 5],
+                    [Items.SILENT_SHROOM, 8],
+                    [Items.STICKY_FROG, 5],
+                    [Items.SNEAKY_RIVER_SNAIL, 5],
                 ],
                 [
-                    [Items.LARGE_ZONAITE, 10],
-                    [Items.CAPTAIN_CONSTRUCT_2_HORN, 5],
-                    [Items.SOLDIER_CONSTRUCT_4_HORN, 5],
+                    [Items.SUNDELION, 10],
+                    [Items.STEALTHFIN_TROUT, 10],
+                    [Items.SILENT_PRINCESS, 5],
                 ],
             ],
         },
-        setBonus: "Energy Recharge Up",
+        setBonus: "Stealth Up",
+    },
+    {
+        name: "Climber Set",
+        headgear: {
+            name: "Climber's Bandana",
+            materialsRequiredForUpgrades: <MaterialRequirement[][]>[
+                [
+                    [Items.KEESE_WING, 3],
+                    [Items.RUSHROOM, 3],
+                ],
+                [
+                    [Items.ELECTRIC_KEESE_WING, 5],
+                    [Items.HIGHTAIL_LIZARD, 5],
+                ],
+                [
+                    [Items.ICE_KEESE_WING, 8],
+                    [Items.HOT_FOOTED_FROG, 10],
+                ],
+                [
+                    [Items.FIRE_KEESE_WING, 10],
+                    [Items.SWIFT_VIOLET, 20],
+                ],
+            ],
+        },
+        body: {
+            name: "Climbing Gear",
+            materialsRequiredForUpgrades: <MaterialRequirement[][]>[
+                [
+                    [Items.KEESE_WING, 3],
+                    [Items.RUSHROOM, 3],
+                ],
+                [
+                    [Items.ELECTRIC_KEESE_WING, 5],
+                    [Items.HIGHTAIL_LIZARD, 5],
+                ],
+                [
+                    [Items.ICE_KEESE_WING, 8],
+                    [Items.HOT_FOOTED_FROG, 10],
+                ],
+                [
+                    [Items.FIRE_KEESE_WING, 10],
+                    [Items.SWIFT_VIOLET, 20],
+                ],
+            ],
+        },
+        legwear: {
+            name: "Climbing Boots",
+            materialsRequiredForUpgrades: <MaterialRequirement[][]>[
+                [
+                    [Items.KEESE_WING, 3],
+                    [Items.RUSHROOM, 3],
+                ],
+                [
+                    [Items.ELECTRIC_KEESE_WING, 5],
+                    [Items.HIGHTAIL_LIZARD, 5],
+                ],
+                [
+                    [Items.ICE_KEESE_WING, 8],
+                    [Items.HOT_FOOTED_FROG, 10],
+                ],
+                [
+                    [Items.FIRE_KEESE_WING, 10],
+                    [Items.SWIFT_VIOLET, 20],
+                ],
+            ],
+        },
+        setBonus: "Climb Speed Up",
     },
 ].sort((a, b) => a.name.localeCompare(b.name));
 
