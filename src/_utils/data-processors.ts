@@ -1,7 +1,7 @@
 import { ArmorPiece, ArmorSet } from "../_models/armor";
-import { StringNumberMap } from "../_models/generic";
+import { RupeeRequirements, StringNumberMap } from "../_models/generic";
 
-export function extractUniqueArmorPieceNames(armorData: ArmorSet[]): string[] {
+export function extractUniqueArmorPieceNames(armorData: ArmorSet[]) {
     return armorData.flatMap((armorSet) => [
         armorSet.headgear.name,
         armorSet.body.name,
@@ -9,7 +9,7 @@ export function extractUniqueArmorPieceNames(armorData: ArmorSet[]): string[] {
     ]);
 }
 
-export function extractUniqueMaterialNames(armorData: ArmorSet[]): string[] {
+export function extractUniqueMaterialNames(armorData: ArmorSet[]) {
     const uniqueNames: Set<string> = new Set();
     armorData.forEach((armorSet) => {
         for (const [key, val] of Object.entries(armorSet)) {
@@ -26,7 +26,7 @@ export function extractUniqueMaterialNames(armorData: ArmorSet[]): string[] {
     return [...uniqueNames];
 }
 
-export function extractMaterialRequirements(armorData: ArmorSet[]): StringNumberMap {
+export function extractMaterialRequirements(armorData: ArmorSet[]) {
     const requirments: StringNumberMap = {};
     for (const armorSet of armorData) {
         for (const [key, val] of Object.entries(armorSet)) {
@@ -44,20 +44,20 @@ export function extractMaterialRequirements(armorData: ArmorSet[]): StringNumber
     return requirments;
 }
 
-export function addRupeeReqsToArmorSet(armorSet: ArmorSet): void {
+export function addRupeeReqsToArmorSet(armorSet: ArmorSet) {
     addRupeeReqsToArmorPiece(armorSet.headgear);
     addRupeeReqsToArmorPiece(armorSet.body);
     addRupeeReqsToArmorPiece(armorSet.legwear);
 }
 
-function addRupeeReqsToArmorPiece(armorPiece: ArmorPiece): void {
+function addRupeeReqsToArmorPiece(armorPiece: ArmorPiece) {
     armorPiece.materialsRequiredForUpgrades.forEach((level, i) => {
         let req: number;
         switch (i) {
-            case 0: req = 10; break;
-            case 1: req = 50; break;
-            case 2: req = 200; break;
-            case 3: req = 500; break;
+            case 0: req = RupeeRequirements.LEVEL_0; break;
+            case 1: req = RupeeRequirements.LEVEL_1; break;
+            case 2: req = RupeeRequirements.LEVEL_2; break;
+            case 3: req = RupeeRequirements.LEVEL_3; break;
             default: req = 0;
         }
         level.push(["Rupee", req]);

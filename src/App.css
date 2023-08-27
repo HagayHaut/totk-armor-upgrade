@@ -1,17 +1,63 @@
-.selected-armor-piece {
-    display: flex;
-    gap: 1rem;
-}
-
-.remove-selected-piece {
-    cursor: pointer;
-}
-
-.selected-pieces-container {
-    height: 50vh;
-    overflow: auto;
-}
-
 .app {
     display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .content {
+        display: flex;
+
+        .left-panel {
+            width: 300px;
+            .selected-pieces-container {
+                height: 500px;
+                overflow: auto;
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+
+                .selected-armor-piece {
+                    display: flex;
+                    width: 260px;
+                    justify-content: space-between;
+                    background-color: #eee;
+                    height: 50px;
+                    border-radius: 10px;
+                    padding: 0 10px 0 10px;
+                  
+                    .remove-selected-piece {
+                        cursor: pointer;
+                        
+                    }
+
+                    .remove-selected-piece:hover {
+                        color: red;
+                    }
+                }
+
+                .selected-armor-piece:hover {
+                    background-color: #f5f5f5;
+                }
+            }
+        }
+
+        .right-panel {
+            width: 300px;
+            .results-container {
+                height: 500px;
+                overflow: auto;
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                .item-requirement {
+                    display: flex;
+                    justify-content: space-between;
+                    width: 260px;
+                    background-color: #eee;
+                    height: 50px;
+                    border-radius: 10px;
+                    padding: 0 10px 0 10px;
+                }
+            }
+        }
+    }
 }

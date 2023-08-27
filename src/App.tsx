@@ -3,6 +3,8 @@ import "./App.css";
 import { armorData, armorPieceNames } from "./_data/armor";
 import { StringNumberMap } from "./_models/generic";
 import { ArmorPiece } from "./_models/armor";
+import SelectedArmorPiece from "./components/SelectedArmorPiece";
+import CalculatedResult from "./components/CalculatedResult";
 
 export interface ArmorPieceInputData {
     name: string;
@@ -44,6 +46,11 @@ function App() {
         setFormState(initialFormState);
     }
 
+    function clearResults() {
+        setCalculatedResults(null);
+        setSelectedArmorPieces([]);
+    }
+
     function removeArmorPieceFromState(toRemove: string) {
         setSelectedArmorPieces(
             selectedArmorPieces.filter((x) => x.name !== toRemove)
@@ -52,9 +59,18 @@ function App() {
 
     function calculateItemRequirements() {
         const requirements: StringNumberMap = {};
-        selectedArmorPieces.forEach(({ name, level }) => {
-            const armorPiece = retrieveArmorPiece(name);
+        const armorPieces = armorData.flatMap(({ headgear, body, legwear }) => [
+            headgear,
+            body,
+            legwear,
+        ]);
+        for (const { name, level } of selectedArmorPieces) {
+            const armorPiece =
+                armorPieces.find((piece) => piece.name === name) ??
+                ({} as ArmorPiece);
+
             if (!armorPiece.materialsRequiredForUpgrades) return;
+
             for (let i = level; i < 4; i++) {
                 armorPiece.materialsRequiredForUpgrades[i].forEach(
                     ([material, req]) => {
@@ -63,24 +79,11 @@ function App() {
                     }
                 );
             }
-        });
-        console.log(requirements);
+        }
         setCalculatedResults(requirements);
     }
 
-    function retrieveArmorPiece(name: string): ArmorPiece {
-        return (
-            armorData
-                .flatMap(({ headgear, body, legwear }) => [
-                    headgear,
-                    body,
-                    legwear,
-                ])
-                .find((piece) => piece.name === name) ?? ({} as ArmorPiece)
-        );
-    }
-
-    function selectAllArmorPiece() {
+    function selectAllArmorPieces() {
         const allPieces: ArmorPieceInputData[] = [];
         armorData.forEach(({ headgear, body, legwear }) => {
             [headgear, body, legwear].forEach(({ name }) => {
@@ -93,64 +96,82 @@ function App() {
         setSelectedArmorPieces(allPieces);
     }
 
+    function formattedCalculatedResults(): JSX.Element[] {
+        return Object.entries(calculatedResults ?? [])
+            .sort((a, b) => a[0].localeCompare(b[0]))
+            .map(([item, requirement]) => (
+                <CalculatedResult 
+                    key={item + requirement}
+                    item={item}
+                    requirement={requirement}
+                />
+            ));
+    }
+
     const selectedArmorPieceListItems = selectedArmorPieces.map(
         ({ name, level }) => {
             return (
-                <div key={name} className="selected-armor-piece">
-                    <p>{`${name}: ${level}`}</p>
-                    <p
-                        onClick={() => removeArmorPieceFromState(name)}
-                        className="remove-selected-piece"
-                    >
-                        X
-                    </p>
-                </div>
+                <SelectedArmorPiece
+                    name={name}
+                    level={level}
+                    key={name}
+                    removeArmorPieceFromState={removeArmorPieceFromState}
+                />
             );
         }
     );
 
     return (
-        <>
-            <h1>TOTK Armor Upgrade Guide</h1>
-            <div className="app">
-                <div className="left-panel">
-                    <div className="selected-pieces-container">
-                        {selectedArmorPieceListItems}
+        <div className="app">
+            <div>
+                <h1 style={{width: '600px', textAlign: 'center'}}>TOTK Armor Upgrade Guide</h1>
+                <div className="content">
+                    <div className="left-panel">
+                        <div className="selected-pieces-container">
+                            {selectedArmorPieceListItems}
+                        </div>
+                        <form onSubmit={handleSubmit}>
+                            <select
+                                value={formState.name}
+                                name="name"
+                                onChange={handleChange}
+                            >
+                                <option value=""></option>
+                                {armorSuitOptions}
+                            </select>
+                            <select
+                                name="level"
+                                value={formState.level + ""}
+                                onChange={handleChange}
+                            >
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                            </select>
+                            <button type="submit">+</button>
+                        </form>
+                        <br />
+                        <br />
+                        <button onClick={() => selectAllArmorPieces()}>
+                            Just add everythying at level 0
+                        </button>
+                        <button onClick={() => calculateItemRequirements()}>
+                            Calculate
+                        </button>
                     </div>
-                    <form onSubmit={(e) => handleSubmit(e)}>
-                        <select
-                            value={formState.name}
-                            name="name"
-                            onChange={(e) => handleChange(e)}
-                        >
-                            <option value=""></option>
-                            {armorSuitOptions}
-                        </select>
-                        <select
-                            name="level"
-                            value={formState.level + ""}
-                            onChange={(e) => handleChange(e)}
-                        >
-                            <option value="0">0</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                        </select>
-                        <button type="submit">Add piece</button>
-                    </form>
-                    <br />
-                    <br />
-                    <button onClick={() => selectAllArmorPiece()}>
-                        Just add everythying at level 0
-                    </button>
-                    <button onClick={() => calculateItemRequirements()}>
-                        Calculate
-                    </button>
+                    <div className="right-panel">
+                        <div className="results-container">
+                            {formattedCalculatedResults()}
+                        </div>
+                        <button onClick={() => clearResults()}>
+                            Clear results
+                        </button>
+                    </div>
                 </div>
-                <div className="right-panel"></div>
             </div>
-        </>
+        </div>
     );
 }
 
