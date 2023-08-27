@@ -25,7 +25,7 @@ function App() {
     const [selectedArmorPieces, setSelectedArmorPieces] = useState<
         ArmorPieceInputData[]
     >([]);
-    const [calculatedResults, setCalculatedResults] = useState<StringNumberMap | null>(null);
+    const [itemRequirements, setItemRequirements] = useState<StringNumberMap | null>(null);
 
     function handleChange(e: ChangeEvent<HTMLSelectElement>) {
         const { name, value } = e.target;
@@ -47,7 +47,7 @@ function App() {
     }
 
     function clearResults() {
-        setCalculatedResults(null);
+        setItemRequirements(null);
         setSelectedArmorPieces([]);
     }
 
@@ -69,7 +69,7 @@ function App() {
                 armorPieces.find((piece) => piece.name === name) ??
                 ({} as ArmorPiece);
 
-            if (!armorPiece.materialsRequiredForUpgrades) return;
+            if (!armorPiece.materialsRequiredForUpgrades) continue;
 
             for (let i = level; i < 4; i++) {
                 armorPiece.materialsRequiredForUpgrades[i].forEach(
@@ -80,7 +80,7 @@ function App() {
                 );
             }
         }
-        setCalculatedResults(requirements);
+        setItemRequirements(requirements);
     }
 
     function selectAllArmorPieces() {
@@ -96,17 +96,16 @@ function App() {
         setSelectedArmorPieces(allPieces);
     }
 
-    function formattedCalculatedResults(): JSX.Element[] {
-        return Object.entries(calculatedResults ?? [])
-            .sort((a, b) => a[0].localeCompare(b[0]))
-            .map(([item, requirement]) => (
-                <CalculatedResult 
-                    key={item + requirement}
-                    item={item}
-                    requirement={requirement}
-                />
-            ));
-    }
+    const formattedItemRequirements = Object.entries(itemRequirements ?? [])
+        .sort((a, b) => a[0].localeCompare(b[0]))
+        .map(([item, requirement]) => (
+            <CalculatedResult 
+                key={item + requirement}
+                item={item}
+                requirement={requirement}
+            />
+        ));
+    
 
     const selectedArmorPieceListItems = selectedArmorPieces.map(
         ({ name, level }) => {
@@ -124,7 +123,9 @@ function App() {
     return (
         <div className="app">
             <div>
-                <h1 style={{width: '600px', textAlign: 'center'}}>TOTK Armor Upgrade Guide</h1>
+                <h1 style={{width: '600px', textAlign: 'center'}}>
+                    TOTK Armor Upgrade Guide
+                </h1>
                 <div className="content">
                     <div className="left-panel">
                         <div className="selected-pieces-container">
@@ -163,7 +164,7 @@ function App() {
                     </div>
                     <div className="right-panel">
                         <div className="results-container">
-                            {formattedCalculatedResults()}
+                            {formattedItemRequirements}
                         </div>
                         <button onClick={() => clearResults()}>
                             Clear results
