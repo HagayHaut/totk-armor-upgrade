@@ -1,7 +1,7 @@
 import { ArmorPiece, ArmorSet } from "../_models/armor";
 import { Items, RupeeRequirements, StringNumberMap } from "../_models/generic";
 
-export function extractUniqueArmorPieceNames(armorData: ArmorSet[]) {
+export function extractArmorPieceNames(armorData: ArmorSet[]) {
     return armorData.flatMap((armorSet) => [
         armorSet.headgear.name,
         armorSet.body.name,
@@ -45,9 +45,9 @@ export function extractMaterialRequirements(armorData: ArmorSet[]) {
 }
 
 export function addRupeeReqsToArmorSet(armorSet: ArmorSet) {
-    addRupeeReqsToArmorPiece(armorSet.headgear);
-    addRupeeReqsToArmorPiece(armorSet.body);
-    addRupeeReqsToArmorPiece(armorSet.legwear);
+    [armorSet.headgear, armorSet.body, armorSet.legwear].forEach(
+        addRupeeReqsToArmorPiece
+    );
 }
 
 function addRupeeReqsToArmorPiece(armorPiece: ArmorPiece) {
