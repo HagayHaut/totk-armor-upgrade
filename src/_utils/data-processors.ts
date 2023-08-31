@@ -1,3 +1,5 @@
+import { ArmorPieceInputData } from "../App";
+import { armorData } from "../_data/armor";
 import { ArmorPiece, ArmorSet } from "../_models/armor";
 import { Items, RupeeRequirements, StringNumberMap } from "../_models/generic";
 
@@ -62,4 +64,29 @@ function addRupeeReqsToArmorPiece(armorPiece: ArmorPiece) {
         }
         level.push([Items.RUPEE, req]);
     });
+}
+
+export function calculateItemRequirements(selectedArmorPieces: ArmorPieceInputData[]) {
+    const requirements: StringNumberMap = {};
+    const armorPieces = armorData.flatMap(({ headgear, body, legwear }) => [
+        headgear,
+        body,
+        legwear,
+    ]);
+    for (const { name, level } of selectedArmorPieces) {
+        const armorPiece = armorPieces.find((piece) => 
+            piece.name === name) ?? ({} as ArmorPiece);
+
+        if (!armorPiece.materialsRequiredForUpgrades) continue;
+
+        for (let i = level; i < 4; i++) {
+            armorPiece.materialsRequiredForUpgrades[i].forEach(
+                ([material, req]) => {
+                    requirements[material] ??= 0;
+                    requirements[material] += req;
+                }
+            );
+        }
+    }
+    return requirements;
 }

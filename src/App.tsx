@@ -2,42 +2,32 @@ import { ChangeEvent, FormEvent, useState } from "react";
 import "./App.css";
 import { armorData, armorPieceNames } from "./_data/armor";
 import { StringNumberMap } from "./_models/generic";
-import { ArmorPiece } from "./_models/armor";
 import SelectedArmorPiece from "./components/SelectedArmorPiece";
 import CalculatedResult from "./components/CalculatedResult";
+import { calculateItemRequirements } from "./_utils/data-processors";
 
 export interface ArmorPieceInputData {
     name: string;
     level: 0 | 1 | 2 | 3 | 4;
 }
 
-interface FormState {
-    name: string;
-    level: 0 | 1 | 2 | 3 | 4;
-}
-
 function App() {
-    const initialFormState: FormState = {
+    const initialFormState: ArmorPieceInputData = {
         name: "",
         level: 0,
     };
-    const [formState, setFormState] = useState<FormState>(initialFormState);
-    const [selectedArmorPieces, setSelectedArmorPieces] = useState<
-        ArmorPieceInputData[]
-    >([]);
+    const [formState, setFormState] = useState<ArmorPieceInputData>(initialFormState);
+    const [selectedArmorPieces, setSelectedArmorPieces] = useState<ArmorPieceInputData[]>([]);
     const [itemRequirements, setItemRequirements] = useState<StringNumberMap | null>(null);
 
     function handleChange(e: ChangeEvent<HTMLSelectElement>) {
         const { name, value } = e.target;
-        const sanitizedValue: string | number =
-            name === "level" ? +value : value;
+        const sanitizedValue = name === "level" ? +value : value;
         setFormState({ ...formState, [name]: sanitizedValue });
     }
 
     const armorSuitOptions: JSX.Element[] = armorPieceNames.map((name) => (
-        <option key={name} value={name}>
-            {name}
-        </option>
+        <option key={name} value={name}>{name}</option>
     ));
 
     function handleSubmit(e: FormEvent<HTMLFormElement>) {
@@ -57,30 +47,8 @@ function App() {
         );
     }
 
-    function calculateItemRequirements() {
-        const requirements: StringNumberMap = {};
-        const armorPieces = armorData.flatMap(({ headgear, body, legwear }) => [
-            headgear,
-            body,
-            legwear,
-        ]);
-        for (const { name, level } of selectedArmorPieces) {
-            const armorPiece =
-                armorPieces.find((piece) => piece.name === name) ??
-                ({} as ArmorPiece);
-
-            if (!armorPiece.materialsRequiredForUpgrades) continue;
-
-            for (let i = level; i < 4; i++) {
-                armorPiece.materialsRequiredForUpgrades[i].forEach(
-                    ([material, req]) => {
-                        requirements[material] ??= 0;
-                        requirements[material] += req;
-                    }
-                );
-            }
-        }
-        setItemRequirements(requirements);
+    function calculateAndSetItemRequirements() {
+        setItemRequirements(calculateItemRequirements(selectedArmorPieces));
     }
 
     function selectAllArmorPieces() {
@@ -158,7 +126,7 @@ function App() {
                         <button onClick={() => selectAllArmorPieces()}>
                             Just add everythying at level 0
                         </button>
-                        <button onClick={() => calculateItemRequirements()}>
+                        <button onClick={() => calculateAndSetItemRequirements()}>
                             Calculate
                         </button>
                     </div>
